@@ -1,0 +1,41 @@
+<div>
+  <mat-slider
+    [max]="8"
+    [min]="0"
+    [step]="1"
+    [(value)]="octave"
+    [thumbLabel]="true"
+    [vertical]="true">
+  </mat-slider>
+
+  <mat-slider
+    [max]="9600"
+    [min]="-9600"
+    [step]="100"
+    [thumbLabel]="true"
+    [(value)]="noteDetune"
+    [vertical]="true">
+  </mat-slider>
+</div>
+
+<div>
+  <mat-select [placeholder]="'Note wave type'">
+    <mat-option *ngFor="let waveType of waveTypes" [value]="noteWaveType">{{waveType}}</mat-option>
+  </mat-select>
+
+</div>
+
+<div class="keys">
+  <app-key [note]="'C'"></app-key>
+  <app-key [note]="'C#'"></app-key>
+  <app-key [note]="'D'"></app-key>
+  <app-key [note]="'Eb'"></app-key>
+  <app-key [note]="'E'"></app-key>
+  <app-key [note]="'F'"></app-key>
+  <app-key [note]="'F#'"></app-key>
+  <app-key [note]="'G'"></app-key>
+  <app-key [note]="'G#'"></app-key>
+  <app-key [note]="'A'"></app-key>
+  <app-key [note]="'Bb'"></app-key>
+  <app-key [note]="'B'"></app-key>
+</div>
