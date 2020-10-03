@@ -9,6 +9,8 @@ import {AudioService} from "../audio.service";
 export class KeyComponent implements OnInit {
   @Input() note: String;
   @Input() isPlaying: boolean;
+  @Input() isGood: boolean = false;
+  @Input() isBad: boolean = false;
   title: string;
   isHalf: boolean;
   constructor(private audioService: AudioService) { }

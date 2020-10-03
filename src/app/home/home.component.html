@@ -1,13 +1,15 @@
 <div class="home__container">
   <div>
-    <mat-slider
-      [max]="8"
-      [min]="0"
-      [step]="1"
-      [(value)]="noteOctave"
-      [thumbLabel]="true"
-      [vertical]="isVertical">
-    </mat-slider>
+
+      <mat-slider
+        [max]="8"
+        [min]="0"
+        [step]="1"
+        [(value)]="noteOctave"
+        [thumbLabel]="true"
+        [vertical]="isVertical">
+      </mat-slider>
+
 
     <mat-slider
       [max]="1666"
@@ -20,9 +22,9 @@
 
 
     <mat-slider
-      [max]="9600"
-      [min]="-9600"
-      [step]="100"
+      [max]="4800"
+      [min]="-4800"
+      [step]="50"
       [thumbLabel]="true"
       [(value)]="noteDetune"
       [vertical]="isVertical">
@@ -81,6 +83,18 @@
     <app-chord [chord]="'A7'" [isPlaying]="chordsPlaying['A7']"></app-chord>
     <app-chord [chord]="'B7'" [isPlaying]="chordsPlaying['B7']"></app-chord>
   </div>
-  <!-- todo font awesome fa-random icon! s-->
+  <div class="loops">
+    <!-- todo font awesome fa-plus icon! -->
+    <button (click)="startRecordLoop()">Start Record Loop (Space)</button>
+    <button (click)="endRecordLoopAndPlayIt()">End Record Loop And Play It (Space)</button>
+    <button (click)="endRecordLoopNotPlayIt()">End Record Loop And NOT Play It (Shift+Space)</button>
+    <ul>
+      <li *ngFor="let loop of loops">
+        <app-loop [loop]="loop"></app-loop>
+      </li>
+    </ul>
+  </div>
+
+  <!-- todo font awesome fa-random icon! -->
   <button (click)="shuffle()">Shuffle</button>
 </div>

@@ -11,6 +11,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import { ChordComponent } from './chord/chord.component';
 import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { LoopComponent } from './loop/loop.component';
 
 
 
@@ -19,7 +20,8 @@ import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppComponent,
     HomeComponent,
     KeyComponent,
-    ChordComponent
+    ChordComponent,
+    LoopComponent
   ],
   imports: [
     BrowserModule,

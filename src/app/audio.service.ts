@@ -184,7 +184,7 @@ export class AudioService {
       o.connect(g);
       g.connect(context.destination);
       o.start(0);
-      o.detune.linearRampToValueAtTime(666, context.currentTime + 0.666);
+      //o.detune.linearRampToValueAtTime(666, context.currentTime + 0.666);
 
       this._notesPlaying[key] = {
           o, g, t: context.currentTime
@@ -204,15 +204,15 @@ export class AudioService {
       note = note.replace('-1', '')
     }
     const key = note + ':' + octave;
-    const length = 1 /  this._noteLength;
+    const length = 0.8 + 0.1 / this._noteLength;
     if (this._notesPlaying[key]) {
       const {g, o, t} = this._notesPlaying[key];
-      g.gain.exponentialRampToValueAtTime(this._gainTargetValue, t + length);
+      g.gain.linearRampToValueAtTime(this._gainTargetValue, t + length);
       this._notesPlaying[key] = null;
       setTimeout(() => {
         //this._notesPlaying[key] = null;
         o.stop();
-      }, length * 1200 );
+      }, 666 + this._noteLength);
     } else {
       // todo ???
     }

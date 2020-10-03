@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { KeyComponent } from "../key/key.component";
+import {Component, OnInit} from '@angular/core';
 import {AudioService} from "../audio.service";
+import {Loop} from "../loop";
+import {$e} from "codelyzer/angular/styles/chars";
 
 @Component({
   selector: 'app-home',
@@ -10,9 +11,9 @@ import {AudioService} from "../audio.service";
 export class HomeComponent implements OnInit {
   noteOctave: number = 3;
   noteDetune: number = 0;
-  noteWaveType: string = 'sine';
+  noteWaveType: string = 'square';
   waveTypes: string[] = ['triangle', 'sine', 'sawtooth', 'square'];
-  noteGainTargetValue: number = 0.0001;
+  noteGainTargetValue: number = 0.000000000001;
   isVertical: boolean = false;
   noteLength: number = 666;
   notesPlaying = {
@@ -50,6 +51,8 @@ export class HomeComponent implements OnInit {
     'A7': false,
     'B7': false,
   }
+  loops: Loop[] = [];
+  private _currentLoop: Loop;
 
   constructor(private audioService: AudioService) { }
 
@@ -68,6 +71,7 @@ export class HomeComponent implements OnInit {
   onKeyDown($event: KeyboardEvent) {
     const note = this.audioService.keyToNote($event);
     if (note && note.length) {
+
       this.notesPlaying[note] = true;
       this.audioService.startNote(note, this.noteOctave);
     }
@@ -88,22 +92,39 @@ export class HomeComponent implements OnInit {
       this.chordsPlaying[chord] = false;
     }
 
+    if ($event.code == 'Space') {
+      if (this._currentLoop) {
+        this.endRecordLoopAndPlayIt();
+      } else {
+        this.startRecordLoop();
+      }
+    }
+
   }
 
   shuffle() {
-    /*
-  noteOctave: number = 3;
-  noteDetune: number = 0;
-  noteWaveType: string = 'sine';
-  waveTypes: string[] = ['triangle', 'sine', 'sawtooth', 'square'];
-  noteGainTargetValue: number = 0.0001;
-  isVertical: boolean = false;
-  noteLength: number = 666;
-      * */
     this.noteOctave = ~~(Math.random() * 8);
     this.noteDetune = ~~(Math.random() * 9600 * 2) - 9600;
     this.noteWaveType = this.waveTypes[~~(Math.random() * this.waveTypes.length)];
-    this.noteGainTargetValue = Math.random();
+    this.noteGainTargetValue = 1 / ((Math.random() * 256) + 128);
     this.noteLength = ~~(Math.random() * 2400) + 333;
+  }
+
+  startRecordLoop() {
+    this._currentLoop = new Loop();
+  }
+
+  endRecordLoopAndPlayIt() {
+    if (this._currentLoop) {
+      this._currentLoop.play();
+      this.endRecordLoopNotPlayIt();
+    }
+  }
+  endRecordLoopNotPlayIt() {
+    const loop = this._currentLoop;
+    loop.endRecord();
+    this.loops.push(loop);
+    loop.index = this.loops.length;
+    this._currentLoop = null;
   }
 }
