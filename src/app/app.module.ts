@@ -9,13 +9,17 @@ import { KeyComponent } from './key/key.component';
 import {MatSliderModule} from "@angular/material/slider";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
+import { ChordComponent } from './chord/chord.component';
+import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    KeyComponent
+    KeyComponent,
+    ChordComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,8 @@ import {MatSelectModule} from "@angular/material/select";
     BrowserAnimationsModule,
     MatSliderModule,
     MatOptionModule,
-    MatSelectModule
+    MatSelectModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

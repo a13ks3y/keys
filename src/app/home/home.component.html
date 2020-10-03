@@ -1,41 +1,86 @@
-<div>
-  <mat-slider
-    [max]="8"
-    [min]="0"
-    [step]="1"
-    [(value)]="octave"
-    [thumbLabel]="true"
-    [vertical]="true">
-  </mat-slider>
+<div class="home__container">
+  <div>
+    <mat-slider
+      [max]="8"
+      [min]="0"
+      [step]="1"
+      [(value)]="noteOctave"
+      [thumbLabel]="true"
+      [vertical]="isVertical">
+    </mat-slider>
 
-  <mat-slider
-    [max]="9600"
-    [min]="-9600"
-    [step]="100"
-    [thumbLabel]="true"
-    [(value)]="noteDetune"
-    [vertical]="true">
-  </mat-slider>
-</div>
+    <mat-slider
+      [max]="1666"
+      [min]="333"
+      [step]="666 / 55.5"
+      [(value)]="noteLength"
+      [thumbLabel]="true"
+      [vertical]="isVertical">
+    </mat-slider>
 
-<div>
-  <mat-select [placeholder]="'Note wave type'">
-    <mat-option *ngFor="let waveType of waveTypes" [value]="noteWaveType">{{waveType}}</mat-option>
-  </mat-select>
 
-</div>
+    <mat-slider
+      [max]="9600"
+      [min]="-9600"
+      [step]="100"
+      [thumbLabel]="true"
+      [(value)]="noteDetune"
+      [vertical]="isVertical">
+    </mat-slider>
+    <mat-slider
+      [max]="0.01"
+      [min]="-0.000000000001"
+      [step]="0.000000001"
+      [thumbLabel]="true"
+      [(value)]="noteGainTargetValue"
+      [vertical]="isVertical">
+    </mat-slider>
 
-<div class="keys">
-  <app-key [note]="'C'"></app-key>
-  <app-key [note]="'C#'"></app-key>
-  <app-key [note]="'D'"></app-key>
-  <app-key [note]="'Eb'"></app-key>
-  <app-key [note]="'E'"></app-key>
-  <app-key [note]="'F'"></app-key>
-  <app-key [note]="'F#'"></app-key>
-  <app-key [note]="'G'"></app-key>
-  <app-key [note]="'G#'"></app-key>
-  <app-key [note]="'A'"></app-key>
-  <app-key [note]="'Bb'"></app-key>
-  <app-key [note]="'B'"></app-key>
+  </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Note wave type</mat-label>
+    <mat-select [placeholder]="'Note wave type'">
+      <mat-option *ngFor="let waveType of waveTypes" [value]="noteWaveType">{{waveType}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div class="keys">
+    <app-key [note]="'C'" [isPlaying]="notesPlaying['C']"></app-key>
+    <app-key [note]="'C#'" [isPlaying]="notesPlaying['C#']"></app-key>
+    <app-key [note]="'D'" [isPlaying]="notesPlaying['D']"></app-key>
+    <app-key [note]="'Eb'" [isPlaying]="notesPlaying['Eb']"></app-key>
+    <app-key [note]="'E'" [isPlaying]="notesPlaying['E']"></app-key>
+    <app-key [note]="'F'" [isPlaying]="notesPlaying['F']"></app-key>
+    <app-key [note]="'F#'" [isPlaying]="notesPlaying['F#']"></app-key>
+    <app-key [note]="'G'" [isPlaying]="notesPlaying['G']"></app-key>
+    <app-key [note]="'G#'" [isPlaying]="notesPlaying['G#']"></app-key>
+    <app-key [note]="'A'" [isPlaying]="notesPlaying['A']"></app-key>
+    <app-key [note]="'Bb'" [isPlaying]="notesPlaying['Bb']"></app-key>
+    <app-key [note]="'B'" [isPlaying]="notesPlaying['B']"></app-key>
+  </div>
+
+  <div class="chords">
+    <app-chord [chord]="'C'" [isPlaying]="chordsPlaying['C']"></app-chord>
+    <app-chord [chord]="'C#'" [isPlaying]="chordsPlaying['C#']"></app-chord>
+    <app-chord [chord]="'D'" [isPlaying]="chordsPlaying['D']"></app-chord>
+    <app-chord [chord]="'Eb'" [isPlaying]="chordsPlaying['Eb']"></app-chord>
+    <app-chord [chord]="'E'" [isPlaying]="chordsPlaying['E']"></app-chord>
+    <app-chord [chord]="'F'" [isPlaying]="chordsPlaying['F']"></app-chord>
+    <app-chord [chord]="'F#'" [isPlaying]="chordsPlaying['F#']"></app-chord>
+    <app-chord [chord]="'G'" [isPlaying]="chordsPlaying['G']"></app-chord>
+    <app-chord [chord]="'G#'" [isPlaying]="chordsPlaying['G#']"></app-chord>
+    <app-chord [chord]="'A'" [isPlaying]="chordsPlaying['A']"></app-chord>
+    <app-chord [chord]="'Bb'" [isPlaying]="chordsPlaying['Bb']"></app-chord>
+    <app-chord [chord]="'B'" [isPlaying]="chordsPlaying['B']"></app-chord>
+  </div>
+  <div class="chords">
+    <app-chord [chord]="'C7'" [isPlaying]="chordsPlaying['C7']"></app-chord>
+    <app-chord [chord]="'D7'" [isPlaying]="chordsPlaying['D7']"></app-chord>
+    <app-chord [chord]="'E7'" [isPlaying]="chordsPlaying['E7']"></app-chord>
+    <app-chord [chord]="'F7'" [isPlaying]="chordsPlaying['F7']"></app-chord>
+    <app-chord [chord]="'G7'" [isPlaying]="chordsPlaying['G7']"></app-chord>
+    <app-chord [chord]="'A7'" [isPlaying]="chordsPlaying['A7']"></app-chord>
+    <app-chord [chord]="'B7'" [isPlaying]="chordsPlaying['B7']"></app-chord>
+  </div>
+  <!-- todo font awesome fa-random icon! s-->
+  <button (click)="shuffle()">Shuffle</button>
 </div>
