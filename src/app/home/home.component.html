@@ -85,9 +85,9 @@
   </div>
   <div class="loops">
     <!-- todo font awesome fa-plus icon! -->
-    <button (click)="startRecordLoop()">Start Record Loop (Space)</button>
-    <button (click)="endRecordLoopAndPlayIt()">End Record Loop And Play It (Space)</button>
-    <button (click)="endRecordLoopNotPlayIt()">End Record Loop And NOT Play It (Shift+Space)</button>
+    <button (click)="startRecordLoop()" [hidden]="!!currentLoop">Start Record Loop (Space)</button>
+    <button (click)="endRecordLoopAndPlayIt()" [hidden]="!currentLoop">End Record Loop And Play It (Space)</button>
+    <button (click)="endRecordLoopNotPlayIt()" [hidden]="!currentLoop">End Record Loop And NOT Play It (Shift+Space)</button>
     <ul>
       <li *ngFor="let loop of loops">
         <app-loop [loop]="loop"></app-loop>

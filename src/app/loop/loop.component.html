@@ -1,2 +1,2 @@
 Loop #{{loop.index}} Duration: {{loop.msDuration / 1000}} seconds.
-<button (click)="togglePlay()">Play/Pause</button>
+<button (click)="togglePlay()">{{ loop.isPlaying ? 'Pause' : 'Play' }}</button>

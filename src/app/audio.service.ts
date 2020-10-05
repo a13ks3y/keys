@@ -24,7 +24,7 @@ export class AudioService {
   }
 
   public static chords = {
-    'C': ['C', 'E', 'G'],
+    'C': ['C+1', 'C', 'E+1', 'G+1', 'C', 'E', 'G'],
     'C#': ['C#', 'G#', 'F'],
     'D': ['D', 'F#', 'A'],
     'Eb': ['Eb', 'G', 'Bb'],
@@ -297,13 +297,16 @@ export class AudioService {
       this.playSingleNote(chordNotes[0], octave, this._noteLength);
       chordNotes.forEach((note, i) => {
         this.playSingleNote(note, octave, i == 0 ? this._noteLength : this._noteLength * 0.96);
-      })
-
+      });
     }
   }
 
 
   setNoteLength(noteLength: number) {
     this._noteLength = noteLength;
+  }
+
+  getNoteDetune() {
+    return this._noteDetune;
   }
 }

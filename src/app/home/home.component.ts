@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
     'B7': false,
   }
   loops: Loop[] = [];
-  private _currentLoop: Loop;
+  currentLoop: Loop;
 
   constructor(private audioService: AudioService) { }
 
@@ -71,9 +71,11 @@ export class HomeComponent implements OnInit {
   onKeyDown($event: KeyboardEvent) {
     const note = this.audioService.keyToNote($event);
     if (note && note.length) {
-
       this.notesPlaying[note] = true;
       this.audioService.startNote(note, this.noteOctave);
+      if (this.currentLoop) {
+        this.currentLoop.startNote(note, this.noteOctave)
+      }
     }
     const chord = this.audioService.keyToChord($event);
     if (chord && !this.chordsPlaying[chord]) {
@@ -93,8 +95,12 @@ export class HomeComponent implements OnInit {
     }
 
     if ($event.code == 'Space') {
-      if (this._currentLoop) {
-        this.endRecordLoopAndPlayIt();
+      if (this.currentLoop) {
+        if ($event.shiftKey) {
+          this.endRecordLoopNotPlayIt();
+        } else {
+          this.endRecordLoopAndPlayIt();
+        }
       } else {
         this.startRecordLoop();
       }
@@ -111,20 +117,23 @@ export class HomeComponent implements OnInit {
   }
 
   startRecordLoop() {
-    this._currentLoop = new Loop();
+    this.currentLoop = new Loop(this.audioService);
   }
 
   endRecordLoopAndPlayIt() {
-    if (this._currentLoop) {
-      this._currentLoop.play();
-      this.endRecordLoopNotPlayIt();
-    }
+    if (this.currentLoop) {
+      const loop = this.currentLoop;
+      loop.endRecord();
+      loop.play();
+      this.loops.push(loop);
+      loop.index = this.loops.length;
+      this.currentLoop = null;    }
   }
   endRecordLoopNotPlayIt() {
-    const loop = this._currentLoop;
+    const loop = this.currentLoop;
     loop.endRecord();
     this.loops.push(loop);
     loop.index = this.loops.length;
-    this._currentLoop = null;
+    this.currentLoop = null;
   }
 }
