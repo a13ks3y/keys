@@ -9,6 +9,7 @@ import {AudioService} from "../audio.service";
 export class ChordComponent implements OnInit {
   @Input() chord: String;
   @Input() isPlaying: boolean;
+  @Input() color: String;
   title: string;
   isHalf: boolean;
   constructor(private audioService: AudioService) { }

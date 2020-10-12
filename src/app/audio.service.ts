@@ -1,5 +1,10 @@
 import {Injectable} from '@angular/core';
 import {$e} from "codelyzer/angular/styles/chars";
+// Каждый морковный охотник жовто-горяче желает знать где ультрамариновый сидит индиго-фазан
+// C      C#        D       Eb           E     F     G    G#              A     G#     B
+
+// C       D         E      F       G    A    B
+// красный оранжевый желтый зеленый где сидит фазан
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +41,14 @@ export class AudioService {
     'A': ['A', 'C', 'F'],
     'Bb': ['Bb', 'D', 'F'],
     'B':  ['B', 'Eb', 'F#'],
+
+    'Cm': ['C', 'Eb', 'G'],
+    'Dm': ['D', 'F', 'A'],
+    'Em': ['E'],
+    'Fm': ['F'],
+    'Gm': [''],
+    'Am': [],
+    'Bm': [],
 
     'C7': ['Bb', 'C', 'E', 'G'],
     'D7': ['F#', 'A', 'C', 'D'],
@@ -100,6 +113,16 @@ export class AudioService {
     ';': 'A',
     '\'': 'Bb',
     '\\': 'B',
+
+    'z': 'Cm',
+    'x': 'Dm',
+    'c': 'Em',
+    'v': 'Fm',
+    'b': 'Gm',
+    'n': 'Am',
+    'm': 'Bm',
+
+/*
     'z': 'C7',
     'x': 'D7',
     'c': 'E7',
@@ -107,7 +130,7 @@ export class AudioService {
     'b': 'G7',
     'n': 'A7',
     'm': 'B7',
-
+*/
     'A': 'C+1',
     'S': 'C#+1',
     'D': 'D+1',
@@ -120,14 +143,17 @@ export class AudioService {
     ':': 'A+1',
     '"': 'Bb+1',
     '|': 'B+1',
-    'Z': 'C7+1',
-    'X': 'D7+1',
-    'C': 'E7+1',
-    'V': 'F7+1',
-    'B': 'G7+1',
-    'N': 'A7+1',
-    'M': 'B7+1',
 
+
+///*
+    'Z': 'C7',
+    'X': 'D7',
+    'C': 'E7',
+    'V': 'F7',
+    'B': 'G7',
+    'N': 'A7',
+    'M': 'B7',
+//*/
     'Shift+A': 'C-1',
     'Shift+S': 'C#-1',
     'Shift+D': 'D-1',
