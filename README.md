@@ -10,6 +10,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
+### Mobile Development
+Run `ng serve --host 0.0.0.0` now it should be accessible from your mobile device (if it is in the same sub-network, like wi-fi).
+
+⚠ **Do not forget to turn off VPN (if any).**
+
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.

@@ -184,7 +184,11 @@ export class AudioService {
   constructor() { }
 
   getNoteContext(): AudioContext {
-    return this._noteContext ? this._noteContext : (this._noteContext = new AudioContext());
+    try {
+      return this._noteContext ? this._noteContext : (this._noteContext = new AudioContext());
+    } catch (e) {
+      alert('Wtf?' + e);
+    }
   }
 
   noteToFrequency(note: string, octave: number): number {
