@@ -185,7 +185,11 @@ export class AudioService {
 
   getNoteContext(): AudioContext {
     try {
-      return this._noteContext ? this._noteContext : (this._noteContext = new AudioContext());
+      const audioContextClassName = 'AudioContext';
+      const webkitAudioContextClassName = 'webkitAudioContext';
+      return this._noteContext ?
+        this._noteContext :
+        (this._noteContext = new (window[audioContextClassName] || window[webkitAudioContextClassName])());
     } catch (e) {
       alert('Wtf?' + e);
     }

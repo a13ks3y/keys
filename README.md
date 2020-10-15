@@ -4,6 +4,10 @@ Yet another synthesizer.
 
 Play it [here](https://a13ks3y.github.io/keys/).
 
+## ToDo
+* use tone.js ?
+
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.3.
 
 ## Development server
