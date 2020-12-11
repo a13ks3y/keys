@@ -44,11 +44,11 @@ export class AudioService {
 
     'Cm': ['C', 'Eb', 'G'],
     'Dm': ['D', 'F', 'A'],
-    'Em': ['E'],
-    'Fm': ['F'],
-    'Gm': [''],
-    'Am': [],
-    'Bm': [],
+    'Em': ['E', 'G', 'B'],
+    'Fm': ['F', 'G#', 'C'], // Ab === G#
+    'Gm': ['G', 'C#', 'B'],
+    'Am': ['A', 'B-1', 'F'], // ???
+    'Bm': ['B', 'D', 'F#'],
 
     'C7': ['Bb', 'C', 'E', 'G'],
     'D7': ['F#', 'A', 'C', 'D'],
@@ -234,14 +234,15 @@ export class AudioService {
       note = note.replace('+1', '')
     }
     if (note.includes('-1')) {
-      octave += 1;
+      octave -= 1;
       note = note.replace('-1', '')
     }
     const key = note + ':' + octave;
     const length = 0.8 + 0.1 / this._noteLength;
     if (this._notesPlaying[key]) {
       const {g, o, t} = this._notesPlaying[key];
-      g.gain.linearRampToValueAtTime(this._gainTargetValue, t + length);
+      //g.gain.linearRampToValueAtTime(this._gainTargetValue, t + length);
+      g.gain.exponentialRampToValueAtTime(this._gainTargetValue, t + length);
       this._notesPlaying[key] = null;
       setTimeout(() => {
         //this._notesPlaying[key] = null;
