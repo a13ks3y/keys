@@ -46,7 +46,7 @@ class LoopItemEndNote extends LoopItem {
     this.type = LoopItemType.startNote;
   }
 }
-
+// @todo: Unit-test Loop class!
 export class Loop {
     items: LoopItem[] = [];
     index: number;

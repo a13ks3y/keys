@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Loop} from "../loop";
+import { AudioService } from '../audio.service';
+import {Loop} from '../loop';
 
 @Component({
   selector: 'app-loop',
@@ -8,7 +9,9 @@ import {Loop} from "../loop";
 })
 export class LoopComponent implements OnInit {
   @Input() loop: Loop;
-  constructor() { }
+  constructor(private audioService: AudioService) {    
+    if (!this.loop) this.loop = new Loop(this.audioService);
+  }
 
   ngOnInit(): void {
   }

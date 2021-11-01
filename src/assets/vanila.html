@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵</title>
+    <style type="text/css">
+        html, body {
+            margin: 0; padding: 0;
+            font-size: 16px;
+        }
+        @media (max-width: 720px) {
+            html, body {
+                font-size: 8px;
+            }
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: black;
+            color: white;
+        }
+        .controls {
+            margin: 0.666rem auto;
+            display: flex;
+            background: #f90;
+            padding: 1.666rem;
+            user-select: none;
+        }
+        .control {
+            cursor: pointer;
+            width: 3.999rem;
+            height: 9.999rem;
+            font-size: 3.333rem;
+            font-weight: bold;
+            font-family: monospace;
+            background: #f90;
+            text-align: center;
+            line-height: 9.999rem;
+            border: 1px solid black;
+        }
+        
+        .control:hover {
+            
+        }
+        .control:active {
+            text-shadow: 0.333px 0.666rem #f90;
+        }
+        input[type=range] {
+            width: 100%;
+        }
+        .control.tone {
+            background: white;
+            color: black;
+        }
+        .control.half-tone {
+            background: black;
+            color: white;
+        }
+        .controls.chords {
+            background-color: white;
+            
+        }
+        #chords {
+            flex-direction: column;
+        }
+        #settings {
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls" id="settings">
+        <!--<input type="range" name="detune" id="detune" value="1500" min="100" step="100" max="3000" />-->
+        <input type="range" name="gain" id="gain" value="2" min="0.1" step="0.25" max="5" />
+        <input type="range" id="octave" name="octave" value="3" min="1" max="7" />
+        <select id="waveType">
+            <option value="square">square</option>
+            <option value="sine" selected="selected">sine</option>
+            <option value="sawtooth">sawtooth</option>
+            <option value="triangle">triangle</option>        
+        </select>
+    </div>
+    <div class="controls" id="notes">
+        <div class="controls">
+            <div class="control tone noteC" data-note="C">C</div>
+            <div class="control half-tone noteC" data-note="C#">C#</div>
+            <div class="control tone" data-note="D">D</div>
+            <div class="control half-tone" data-note="Eb">Eb</div>
+            <div class="control tone" data-note="E">E</div>
+            <div class="control tone" data-note="F">F</div>
+            <div class="control half-tone" data-note="F#">F#</div>
+            <div class="control tone" data-note="G">G</div>
+            <div class="control half-tone" data-note="G#">G#</div>
+            <div class="control tone" data-note="A">A</div>
+            <div class="control half-tone" data-note="Bb">Bb</div>
+            <div class="control tone" data-note="B">B</div>
+        </div>
+    </div>
+
+    <div class="controls chords" id="chords">       
+        <div class="controls">
+            <div class="control tone noteC" data-chord="C">C</div>
+            <div class="control half-tone noteCSharp" data-chord="C#">C#</div>
+            <div class="control tone noteD" data-chord="D">D</div>
+            <div class="control half-tone noteEb" data-chord="Eb">Eb</div>
+            <div class="control tone noteE" data-chord="E">E</div>
+            <div class="control tone noteF" data-chord="F">F</div>
+            <div class="control half-tone noteFSharp" data-chord="F#">F#</div>
+            <div class="control tone noteG" data-chord="G">G</div>
+            <div class="control half-tone noteGSharp" data-chord="G#">G#</div>
+            <div class="control tone noteA" data-chord="A">A</div>
+            <div class="control half-tone noteBb" data-chord="Bb">Bb</div>
+            <div class="control tone noteB" data-chord="B">B</div>    
+        </div>
+        <div class="controls">
+            <div class="control tone" data-chord="C7">C7</div>
+            <div class="control tone" data-chord="D7">D7</div>
+            <div class="control tone" data-chord="E7">E7</div>
+            <div class="control tone" data-chord="F7">F7</div>
+            <div class="control tone" data-chord="G7">G7</div>
+            <div class="control tone" data-chord="A7">A7</div>
+            <div class="control tone" data-chord="B7">B7</div>    
+        </div>
+    </div>
+
+    <label for="bit">
+        Bit
+        <input type="checkbox" name="bit" id="bit" />
+        <input type="number" name="bpm" id="bpm" value="120" step="8" min="8" max="512"  />
+    </label>
+
+    <script type="text/javascript">
+        class App {
+            gain = 2
+            octave = 3
+            bpm = 120
+            waveType = 'sine'
+            chordes = {
+                'C': ['C', 'E', 'G'],
+                'C#': ['C#', 'G#', 'F'],
+                'D': ['D', 'F#', 'A'],
+                'Eb': ['G', 'Bb', 'Eb'],
+                'E': ['E', 'G#', 'B'],
+                'F': ['F', 'A', 'C'], // K
+                'F#': ['F#', 'Bb', 'C#'],
+                'G': ['G', 'B', 'D'],
+                'G#': ['G#', 'E', 'B'],
+                'A': ['A', 'F', 'C'],
+                'Bb': ['Bb', 'D', 'F'],
+                'B':  ['B', 'Eb', 'F#'],
+
+                'C7': ['Bb', 'C', 'E', 'G'],
+                'D7': ['F#', 'A', 'C', 'D'],
+                'E7': ['E', 'G#', 'B', 'D'],
+                'F7': ['F', 'A', 'C', 'Eb'],
+                'G7': ['G', 'B', 'D', 'F'],
+                'A7': ['A', 'C#', 'E', 'G'],
+                'B7': ['B', 'Eb', 'F#', 'A']
+
+            }
+            notes = {
+                'C': [16.35, 32.70, 65.41, 130.8, 261.6, 523.3, 1047, 2093, 4186],
+                'C#': [17.32, 34.65, 69.30, 138.6, 277.2, 554.4, 1109, 2217, 4435],
+                'D': [18.35, 36.71, 73.42, 146.8, 293.7, 587.3, 1175, 2349, 4699],
+                'Eb': [19.45, 38.89, 77.78, 155.6, 311.1, 622.3, 1245, 2489, 4978],
+                'E': [20.60, 41.20, 82.41, 164.8, 329.6, 659.3, 1319, 2637, 5274],
+                'F': [21.83, 43.65, 87.31, 174.6, 349.2, 698.5, 1397, 2794, 5588],
+                'F#': [23.12, 46.25, 92.50, 185.0, 370.0, 740.0, 1480, 2960, 5920],
+                'G': [24.50, 49.00, 98.00, 196.0, 392.0, 784.0, 1568, 3136, 6272],
+                'G#': [25.96, 51.91, 103.8, 207.7, 415.3, 830.6, 1661, 3322, 6645],
+                'A': [27.50, 55.00, 110.0, 220.0, 440.0, 880.0, 1760, 3520, 7040],
+                'Bb': [29.14, 58.27, 116.5, 233.1, 466.2, 932.3, 1865, 3729, 7459],
+                'B': [30.87, 61.74, 123.5, 246.9, 493.9, 987.8, 1976, 3951, 7902]
+            }
+            constructor() {
+                if (confirm('Ready?')) {
+                    this.context = new AudioContext();
+                    const octave = document.getElementById('octave');
+                    const gain = document.getElementById('gain');
+                    //const detune = document.getElementById('detune');
+                    const waveType = document.getElementById('waveType');
+                    const bit = document.getElementById('bit');
+                    const bpm = document.getElementById('bpm');
+
+                    const chords = document.getElementById('chords');
+                    const notes = document.getElementById('notes');
+
+                    const distance = (srcX, srcY, dstX, dstY) => {
+                        const x = srcX > dstX ? srcX - dstX : dstX - srcX;
+                        const y = srcY > dstY ? srcY - dstY : dstY - srcY;
+                        return Math.sqrt(x ** 2 + y ** 2);
+                    };
+
+                    notes.addEventListener('click', e => {
+                        if (e.srcElement) {
+                            const note = e.srcElement.getAttribute('data-note');
+                            if (note) {
+                                const mx = e.offsetX;
+                                const my = e.offsetY;
+                                const rect = notes.children[0].getBoundingClientRect();
+                                const d = distance(mx, my, rect.width / 2, rect.height / 2);
+                                this.note(note, d / 100);
+                            }
+                        }
+                    });
+
+                    chords.addEventListener('click', e => {
+                        if (e.srcElement) {
+                            const chord = e.srcElement.getAttribute('data-chord');
+                            if (chord) {
+                                const mx = e.offsetX;
+                                const my = e.offsetY;
+                                const rect = notes.children[0].getBoundingClientRect();
+                                const d = distance(mx, my, rect.width / 2, rect.height / 2);
+                                this.chord(chord, d / 100 );
+                            }
+                        }
+                    });
+
+                    octave.addEventListener('change', () => {
+                        this.octave = parseInt(octave.value);
+                    });
+                    gain.addEventListener('change', () => {
+                        this.gain = parseFloat(gain.value);
+                    });
+
+                    waveType.addEventListener('change', () => {
+                        this.waveType = waveType.value;
+                    });
+                    bit.addEventListener('change', () => {
+                        this.toggleBit();
+                    });
+                    bpm.addEventListener('change', () => {
+                        this.bpm = parseFloat(bpm.value);
+                    });
+
+                } else {
+                    //???
+                }
+            }
+            toggleBit() {
+                this.bit = !this.bit;
+                if (this.bit) {
+                    this.bitInterval = setInterval(() => {
+                        this.bitNote();
+                    }, 60000 / this.bpm);
+                } else {
+                    clearInterval(this.bitInterval);
+                }
+            }
+            bitNote() {
+                const o = this.context.createOscillator();
+                o.type = this.waveType;
+                o.frequency.value = this.notes['A'][3];
+                //o.detune.value = 250;
+                const g = this.context.createGain();
+                o.connect(g);
+                g.connect(this.context.destination)
+                o.start(0);
+                g.gain.exponentialRampToValueAtTime(0.000000000001, this.context.currentTime + this.bpm / 1000);
+                setTimeout(() => {
+                    o.stop();
+                }, this.bpm);
+            }
+            note(note, duration = 0) {
+                const noteClassName = 'note' + note;
+                //document.body.classList.add(noteClassName);
+                const o = this.context.createOscillator();
+                o.type = this.waveType;
+                o.frequency.value = this.notes[note][this.octave] || 0;
+                //o.detune.value = this.detune;
+                const g = this.context.createGain();
+                const gain = this.gain + this.gain * duration;
+                o.connect(g);
+                g.connect(this.context.destination)
+                o.start(0);
+                setTimeout(() => {
+                    // 0.00001 * 1 / this.gain "vibratto" ???
+                    g.gain.exponentialRampToValueAtTime(0.000000001, this.context.currentTime + gain);
+                    setTimeout(() => {
+                        //document.body.classList.remove(noteClassName);
+                        o.stop();
+                    }, gain > 1 ? gain * 1000 : 1000);
+                }, duration);
+            }
+            chord(chord, duration) {
+                chord = this.chordes[chord];
+                if (chord) {
+                    chord.forEach((note, i) => { 
+                       setTimeout(() => this.note(note, duration), this.gain * i);
+                    });
+                }
+            }
+        }
+        const app = new App();
+    </script>
+</body>
+</html>
