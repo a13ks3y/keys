@@ -8,17 +8,17 @@ export class SfxService {
   isPlaying: boolean;
   playlist: string[] = [];
   sfxSrcMap: any = {
-    explosion: './assets/sfx/explosion.wav',
-    battle_sounds: './assets/sfx/battle_sounds.wav',
-    bigboom: './assets/sfx/bigboom.wav',
-    blkfoot4: './assets/sfx/blkfoot4.wav',
-    bomb: './assets/sfx/bomb.wav',
-    expl05: './assets/sfx/expl05.wav',
-    explode: './assets/sfx/explode.wav',
-    explode1: './assets/sfx/explode1.wav',
-    Explosion7: './assets/sfx/Explosion7.wav',
-    kablooie: './assets/sfx/kablooie.wav',
-    kaboom: './assets/sfx/kaboom.wav',
+    explosion: './src/assets/sfx/explosion.wav',
+    battle_sounds: './src/assets/sfx/battle_sounds.wav',
+    bigboom: './src/assets/sfx/bigboom.wav',
+    blkfoot4: './src/assets/sfx/blkfoot4.wav',
+    bomb: './src/assets/sfx/bomb.wav',
+    expl05: './src/assets/sfx/expl05.wav',
+    explode: './src/assets/sfx/explode.wav',
+    explode1: './src/assets/sfx/explode1.wav',
+    Explosion7: './src/assets/sfx/Explosion7.wav',
+    kablooie: './src/assets/sfx/kablooie.wav',
+    kaboom: './src/assets/sfx/kaboom.wav',
   };
   sfxElMap: any = {};
   constructor() {
