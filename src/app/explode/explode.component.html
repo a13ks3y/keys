@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let item of items; index as i;">
+    <button (click)="play(item)">
+      <span>{{item}}</span>
+    </button>
+  </li>
+</ul>

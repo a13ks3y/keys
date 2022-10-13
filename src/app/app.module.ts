@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { KeyComponent } from './key/key.component';
-import {MatSliderModule} from "@angular/material/slider";
-import {MatOptionModule} from "@angular/material/core";
-import {MatSelectModule} from "@angular/material/select";
+import {MatSliderModule} from '@angular/material/slider';
+import {MatOptionModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 import { ChordComponent } from './chord/chord.component';
 import {FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { LoopComponent } from './loop/loop.component';
+import { TouchComponent } from './touch/touch.component';
+import { ExplodeComponent } from './explode/explode.component';
 
 
 
@@ -21,7 +23,9 @@ import { LoopComponent } from './loop/loop.component';
     HomeComponent,
     KeyComponent,
     ChordComponent,
-    LoopComponent
+    LoopComponent,
+    TouchComponent,
+    ExplodeComponent
   ],
   imports: [
     BrowserModule,
